@@ -3,3 +3,4 @@
 .vscode
 src/obj/*
 src/bin/*
+src/app.config

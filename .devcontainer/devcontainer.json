@@ -1,0 +1,35 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/dotnet
+{
+	"name": "C# (.NET)",
+	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	"image": "mcr.microsoft.com/devcontainers/dotnet:0-7.0"
+
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	// "features": {},
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [5000, 5001],
+	// "portsAttributes": {
+	//		"5001": {
+	//			"protocol": "https"
+	//		}
+	// }
+
+	// Below is a host *Windows* format mount from "c:users\<username>\tmp" to /home/vscode/tmp in the devcontainer
+	// for a Mac or UNIX format use the HOME env instead:e.g. 
+	//   "source=${localEnv:HOME}/tmp,target=/home/vscode/tmp,type=bind,consistency=cached"
+	"mounts": [
+		"source=${localEnv:USERPROFILE}/tmp,target=/home/vscode/tmp,type=bind,consistency=cached"
+		
+	]
+	// Use 'postCreateCommand' to run commands after the container is created.
+	"postCreateCommand": "cd src && dotnet add package AAXClean --version 1.0.3 && dotnet add package StyleCop.Analyzers --version 1.1.118"
+	// "postCreateCommand": "dotnet restore",
+
+	// Configure tool-specific properties.
+	// "customizations": {},
+
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "root"
+}

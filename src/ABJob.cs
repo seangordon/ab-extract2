@@ -10,6 +10,7 @@ namespace ab_extract
 	public class ABJob
 	{
         public string inputFileName;    // Filename Only
+        public string inputFilenameplusPath; //Full path, which is useful as it will respect either the Window or UNIX file conventions 
         public string outputFileName;   // Filename Only
         public string coverArtFile;     // Filename Only
         public string inputDir;
@@ -25,9 +26,12 @@ namespace ab_extract
 
         public ABJob(string filename, string coverArt, bool m4b)
 		{
+            // Save full path 
+            inputFilenameplusPath = filename;
             // Save original Input Filename
             inputFileName = Path.GetFileName(filename);
             inputDir = Path.GetDirectoryName(filename);
+
             coverArtFile = Path.GetFileName(coverArt);
             outputDir = inputDir;  // Default is to output files in the same dir
 
@@ -40,7 +44,9 @@ namespace ab_extract
 
         public AaxFile OpenAaxFile (ActivationByteString activationByteString)
         {
-            aaxFile = new AaxFile(inputFileName, FileAccess.Read, FileShare.Read);
+            //aaxFile = new AaxFile(inputFileName, FileAccess.Read, FileShare.Read);
+
+            aaxFile = new AaxFile(inputFilenameplusPath, FileAccess.Read, FileShare.Read);
             appleTags = aaxFile.AppleTags;
             chapterInfo = aaxFile.GetChaptersFromMetadata();
 
